@@ -2,7 +2,7 @@ package com.sejin.todo_tdd_clean_architecture.data.repository
 
 import com.sejin.todo_tdd_clean_architecture.data.entity.ToDoEntity
 
-class DefaultToDoRepository: ToDoRepository {
+class DefaultToDoRepository : ToDoRepository {
     override suspend fun getToDoList(): List<ToDoEntity> {
         TODO("Not yet implemented")
     }
@@ -15,11 +15,19 @@ class DefaultToDoRepository: ToDoRepository {
         TODO("Not yet implemented")
     }
 
+    override suspend fun deleteToDoItem(id: Long): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getToDoItem(itemId: Long): ToDoEntity? {
         TODO("Not yet implemented")
     }
 
     override suspend fun deleteAll() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertToDoItem(toDoEntity: ToDoEntity): Long {
         TODO("Not yet implemented")
     }
 }

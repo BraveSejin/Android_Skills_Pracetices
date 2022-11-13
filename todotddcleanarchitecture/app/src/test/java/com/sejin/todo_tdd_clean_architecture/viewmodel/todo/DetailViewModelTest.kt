@@ -1,7 +1,7 @@
 package com.sejin.todo_tdd_clean_architecture.viewmodel.todo
 
 import com.sejin.todo_tdd_clean_architecture.data.entity.ToDoEntity
-import com.sejin.todo_tdd_clean_architecture.domain.todo.InsertTodoItemUseCase
+import com.sejin.todo_tdd_clean_architecture.domain.todo.InsertToDoUseCase
 import com.sejin.todo_tdd_clean_architecture.presentation.detail.DetailMode
 import com.sejin.todo_tdd_clean_architecture.presentation.detail.DetailViewModel
 import com.sejin.todo_tdd_clean_architecture.presentation.detail.ToDoDetailState
@@ -29,8 +29,7 @@ internal class DetailViewModelTest : ViewModelTest() {
 
     private val detailViewModel: DetailViewModel by inject { parametersOf(DetailMode.DETAIL, 1) }
     private val listViewModel: ListViewModel by inject()
-
-    private val insertTodoItemUseCase: InsertTodoItemUseCase by inject()
+    private val insertToDoUseCase: InsertToDoUseCase by inject()
 
     private val todo = ToDoEntity(
         id = id,
@@ -51,7 +50,7 @@ internal class DetailViewModelTest : ViewModelTest() {
     }
 
     private fun initData() = runBlockingTest {
-        insertTodoItemUseCase(todo)
+        insertToDoUseCase(todo)
     }
 
     @Test

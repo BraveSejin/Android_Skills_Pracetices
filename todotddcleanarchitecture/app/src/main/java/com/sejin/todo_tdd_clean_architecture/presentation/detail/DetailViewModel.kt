@@ -1,11 +1,10 @@
 package com.sejin.todo_tdd_clean_architecture.presentation.detail
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sejin.todo_tdd_clean_architecture.domain.todo.DeleteTodoItemUseCase
+import com.sejin.todo_tdd_clean_architecture.domain.todo.DeleteToDoItemUseCase
 import com.sejin.todo_tdd_clean_architecture.domain.todo.GetTodoItemUseCase
-import com.sejin.todo_tdd_clean_architecture.domain.todo.UpdateTodoItemUseCase
+import com.sejin.todo_tdd_clean_architecture.domain.todo.UpdateToDoUseCase
 import com.sejin.todo_tdd_clean_architecture.presentation.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -14,8 +13,8 @@ internal class DetailViewModel(
     var detailMode: DetailMode,
     var id: Long = -1,
     private val getTodoItemUseCase: GetTodoItemUseCase,
-    private val deleteTodoItemUseCase: DeleteTodoItemUseCase,
-    private val updateTodoItemUseCase: UpdateTodoItemUseCase,
+    private val deleteTodoItemUseCase: DeleteToDoItemUseCase,
+    private val updateTodoItemUseCase: UpdateToDoUseCase,
 ) : BaseViewModel() {
     private val _toDoDetailLiveData =
         MutableLiveData<ToDoDetailState>(ToDoDetailState.UnInitialized)
