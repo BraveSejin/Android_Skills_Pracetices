@@ -10,11 +10,15 @@ import com.sejin.todo_tdd_clean_architecture.data.entity.ToDoEntity
 interface ToDoRepository {
     suspend fun getToDoList(): List<ToDoEntity>
 
-    suspend fun insertToDoList(todoList: List<ToDoEntity>)
+    suspend fun getToDoItem(id: Long): ToDoEntity?
 
-    suspend fun updateToDoItem(toDoItem: ToDoEntity): Boolean
+    suspend fun insertToDoItem(toDoEntity: ToDoEntity): Long
 
-    suspend fun getToDoItem(itemId: Long): ToDoEntity?
+    suspend fun insertToDoList(toDoList: List<ToDoEntity>)
+
+    suspend fun updateToDoItem(toDoEntity: ToDoEntity): Boolean
+
+    suspend fun deleteToDoItem(id: Long): Boolean
 
     suspend fun deleteAll()
 }
