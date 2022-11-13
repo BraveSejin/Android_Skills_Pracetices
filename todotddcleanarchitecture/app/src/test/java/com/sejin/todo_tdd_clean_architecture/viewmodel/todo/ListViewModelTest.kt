@@ -1,8 +1,10 @@
 package com.sejin.todo_tdd_clean_architecture.viewmodel.todo
 
 import com.sejin.todo_tdd_clean_architecture.data.entity.ToDoEntity
+import com.sejin.todo_tdd_clean_architecture.domain.todo.GetTodoItemUseCase
 import com.sejin.todo_tdd_clean_architecture.domain.todo.InsertTodoListUseCase
 import com.sejin.todo_tdd_clean_architecture.presentation.list.ListViewModel
+import com.sejin.todo_tdd_clean_architecture.presentation.list.ToDoListState
 import com.sejin.todo_tdd_clean_architecture.viewmodel.ViewModelTest
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -21,6 +23,7 @@ internal class ListViewModelTest : ViewModelTest() {
 
     private val viewModel: ListViewModel by inject()
     private val insertTodoListUseCase: InsertTodoListUseCase by inject()
+    private val getToDoItemUseCase: GetTodoItemUseCase by inject()
     private val mockList = (0..9).map {
         ToDoEntity(
             id = it.toLong(),
@@ -51,11 +54,38 @@ internal class ListViewModelTest : ViewModelTest() {
         val testObservable = viewModel.todoListLiveData.test()
         viewModel.fetchData()
         testObservable.assertValueSequence(
-            listOf(mockList)
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(mockList)
+            )
         )
     }
 
     // Test: 데이터를 업데이트 했을 떄 잘 반영되는가
-//    @Test
+    @Test
+    fun `test iItem update`(): Unit = runBlockingTest {
+        val todo = ToDoEntity(
+            id = 1,
+            title = "title 1",
+            description = "description 1",
+            hasCompleted = true
+        )
+        viewModel.updateEntity(todo)
+        assert((getToDoItemUseCase(todo.id)?.hasCompleted ?: false) == todo.hasCompleted)
+    }
 
+    //Test: 데이터를 다 날렸을 때 빈 상태로 보여지는가
+    @Test
+    fun `test Item Delete All`(): Unit = runBlockingTest {
+        val testObservable = viewModel.todoListLiveData.test()
+        viewModel.deleteAll()
+        testObservable.assertValueSequence( // 테스트용 Observable에서 깊은복사를 못해서 이상태로는 테스트 불가!
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(listOf())
+            )
+        )
+    }
 }
