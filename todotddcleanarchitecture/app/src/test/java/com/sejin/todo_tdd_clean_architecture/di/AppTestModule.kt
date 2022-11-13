@@ -13,7 +13,7 @@ internal val appTestModule = module {
 
     //ViewModel
     viewModel { ListViewModel(get(), get(), get()) }
-    viewModel { (detailMode: DetailMode, id: Long) -> DetailViewModel(detailMode, id, get(), get(), get()) }
+    viewModel { (detailMode: DetailMode, id: Long) -> DetailViewModel(detailMode, id, get(), get(), get(),get()) }
     //UseCase
     factory { GetTodoListUseCase(get()) }
     factory { InsertToDoUseCase(get()) }
