@@ -10,7 +10,6 @@ import com.sejin.todo_tdd_clean_architecture.presentation.list.ToDoListState
 import com.sejin.todo_tdd_clean_architecture.viewmodel.ViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Test
 import org.koin.core.parameter.parametersOf
 import org.koin.test.inject
@@ -44,7 +43,7 @@ internal class DetailViewModelTestForWrite : ViewModelTest() {
 
     @Test
     fun `test viewModel fetch`() = runBlockingTest {
-        val testObservable = detailViewModel.todoDetailLiveData.test()
+        val testObservable = detailViewModel.toDoDetailLiveData.test()
 
         detailViewModel.fetchData()
         testObservable.assertValueSequence(
@@ -57,7 +56,7 @@ internal class DetailViewModelTestForWrite : ViewModelTest() {
 
     @Test
     fun `test insert todo`() = runBlockingTest {
-        val detailTObservable = detailViewModel.todoDetailLiveData.test()
+        val detailTObservable = detailViewModel.toDoDetailLiveData.test()
         val listTestObservable = listViewModel.todoListLiveData.test()
 
         detailViewModel.writeToDo(
