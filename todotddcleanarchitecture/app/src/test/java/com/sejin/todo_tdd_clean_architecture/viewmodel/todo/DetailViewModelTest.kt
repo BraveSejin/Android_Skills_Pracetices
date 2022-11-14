@@ -70,7 +70,7 @@ internal class DetailViewModelTest : ViewModelTest() {
     @Test
     fun `test delete todo`() = runBlockingTest {
         val detailTestObservable = detailViewModel.toDoDetailLiveData.test()
-        detailViewModel.deleteTodo()
+        detailViewModel.deleteToDo()
 
         detailTestObservable.assertValueSequence(
             listOf(
